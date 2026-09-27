@@ -1,0 +1,22 @@
+# S&P 500 constituent changes AFTER the study window (2026-07-01 .. 2026-09-21),
+# needed only to roll the current anchor list (sp500_constituents_current_2026-09-21.csv)
+# back to the window end. Same format as sp500_index_changes.csv.
+# Compiled 2026-09-22 from S&P Dow Jones Indices press releases:
+#   2026-08-05  https://press.spglobal.com/2026-07-31-Ferguson-Enterprises-Set-to-Join-S-P-500-and-ADI-Global-Distribution-to-Join-S-P-SmallCap-600
+#   2026-08-18  https://press.spglobal.com/2026-08-13-Reddit-Set-to-Join-S-P-500-and-Sun-Communities-to-Join-S-P-MidCap-400
+#   2026-09-21  https://press.spglobal.com/2026-09-04-Bloom-Energy,-Illumina,-and-Everpure-Set-to-Join-S-P-500-Others-to-Join-S-P-100,-S-P-MidCap-400,-and-S-P-SmallCap-600
+# Ticker successions in the same period (not index changes; the company stayed a member):
+#   SATS -> ECHO  EchoStar, ticker change effective 2026-06-24 (company press release)
+#   EQR  -> VMRK  Equity Residential renamed Vivmark Residential after absorbing AvalonBay, trades as VMRK from 2026-08-18 (SEC 8-K)
+#   PARA -> PSKY  Paramount Global merged into Skydance 2025-08-07; the successor PSKY remained a member (inside the window; see session notes)
+effective_date,action,symbol,company,confidence,note
+2026-08-05,add,FERG,Ferguson Enterprises,verified,replaced Electronic Arts
+2026-08-05,remove,EA,Electronic Arts,verified,taken private by PIF / Silver Lake / Affinity Partners
+2026-08-18,add,RDDT,Reddit,verified,replaced AvalonBay Communities
+2026-08-18,remove,AVB,AvalonBay Communities,verified,merged into Equity Residential (now Vivmark Residential VMRK)
+2026-09-21,add,BE,Bloom Energy,verified,quarterly rebalance
+2026-09-21,add,P,Everpure,verified,quarterly rebalance
+2026-09-21,add,ILMN,Illumina,verified,quarterly rebalance
+2026-09-21,remove,TAP,Molson Coors Beverage,verified,market capitalisation
+2026-09-21,remove,TTD,The Trade Desk,verified,market capitalisation
+2026-09-21,remove,BLDR,Builders FirstSource,verified,market capitalisation

@@ -1,0 +1,73 @@
+# Scheduled US macro releases that can move the whole market inside a
+# 5-day forecast window. Used by 15_macro_event_calendar.py to flag events
+# whose outcome window contains a market-wide shock.
+#
+# 2025 rows come from the project's economic-calendar ingest; 2026 rows are
+# taken from the publishers' own advance schedules (the Fed, BLS and BEA all
+# publish release dates months ahead), because that ingest stopped at the end
+# of 2025. All dates are the RELEASE date, not the reference period.
+#
+# confidence: ingested = from the project calendar feed
+#             official_schedule = from the publishing agency's calendar
+#
+date,event_type,description,source,confidence
+2025-01-10,NFP,US Non-Farm Payrolls Release (Employment Situation),ec_events (project macro ingest),ingested
+2025-01-15,CPI,US CPI Release (headline + core),ec_events (project macro ingest),ingested
+2025-01-29,FOMC_DECISION,FOMC Rate Decision,ec_events (project macro ingest),ingested
+2025-01-31,PCE,US PCE Price Index Release,ec_events (project macro ingest),ingested
+2025-02-07,NFP,US Non-Farm Payrolls Release (Employment Situation),ec_events (project macro ingest),ingested
+2025-02-12,CPI,US CPI Release (headline + core),ec_events (project macro ingest),ingested
+2025-02-28,PCE,US PCE Price Index Release,ec_events (project macro ingest),ingested
+2025-03-07,NFP,US Non-Farm Payrolls Release (Employment Situation),ec_events (project macro ingest),ingested
+2025-03-12,CPI,US CPI Release (headline + core),ec_events (project macro ingest),ingested
+2025-03-19,FOMC_DECISION,FOMC Rate Decision,ec_events (project macro ingest),ingested
+2025-03-28,PCE,US PCE Price Index Release,ec_events (project macro ingest),ingested
+2025-04-04,NFP,US Non-Farm Payrolls Release (Employment Situation),ec_events (project macro ingest),ingested
+2025-04-10,CPI,US CPI Release (headline + core),ec_events (project macro ingest),ingested
+2025-04-30,PCE,US PCE Price Index Release,ec_events (project macro ingest),ingested
+2025-05-02,NFP,US Non-Farm Payrolls Release (Employment Situation),ec_events (project macro ingest),ingested
+2025-05-07,FOMC_DECISION,FOMC Rate Decision,ec_events (project macro ingest),ingested
+2025-05-13,CPI,US CPI Release (headline + core),ec_events (project macro ingest),ingested
+2025-05-30,PCE,US PCE Price Index Release,ec_events (project macro ingest),ingested
+2025-06-06,NFP,US Non-Farm Payrolls Release (Employment Situation),ec_events (project macro ingest),ingested
+2025-06-11,CPI,US CPI Release (headline + core),ec_events (project macro ingest),ingested
+2025-06-18,FOMC_DECISION,FOMC Rate Decision,ec_events (project macro ingest),ingested
+2025-06-27,PCE,US PCE Price Index Release,ec_events (project macro ingest),ingested
+2025-07-03,NFP,US Non-Farm Payrolls Release (Employment Situation),ec_events (project macro ingest),ingested
+2025-07-15,CPI,US CPI Release (headline + core),ec_events (project macro ingest),ingested
+2025-07-30,FOMC_DECISION,FOMC Rate Decision,ec_events (project macro ingest),ingested
+2025-07-31,PCE,US PCE Price Index Release,ec_events (project macro ingest),ingested
+2025-08-01,NFP,US Non-Farm Payrolls Release (Employment Situation),ec_events (project macro ingest),ingested
+2025-08-12,CPI,US CPI Release (headline + core),ec_events (project macro ingest),ingested
+2025-08-29,PCE,US PCE Price Index Release,ec_events (project macro ingest),ingested
+2025-09-05,NFP,US Non-Farm Payrolls Release (Employment Situation),ec_events (project macro ingest),ingested
+2025-09-11,CPI,US CPI Release (headline + core),ec_events (project macro ingest),ingested
+2025-09-17,FOMC_DECISION,FOMC Rate Decision,ec_events (project macro ingest),ingested
+2025-09-26,PCE,US PCE Price Index Release,ec_events (project macro ingest),ingested
+2025-10-24,CPI,US CPI Release (headline + core),ec_events (project macro ingest),ingested
+2025-10-29,FOMC_DECISION,FOMC Rate Decision,ec_events (project macro ingest),ingested
+2025-11-20,NFP,US Non-Farm Payrolls Release (Employment Situation),ec_events (project macro ingest),ingested
+2025-12-05,PCE,US PCE Price Index Release,ec_events (project macro ingest),ingested
+2025-12-10,FOMC_DECISION,FOMC Rate Decision,ec_events (project macro ingest),ingested
+2025-12-16,NFP,US Non-Farm Payrolls Release (Employment Situation),ec_events (project macro ingest),ingested
+2025-12-18,CPI,US CPI Release (headline + core),ec_events (project macro ingest),ingested
+2026-01-13,CPI,CPI release for December 2025,bls.gov release schedule,official_schedule
+2026-01-28,FOMC_DECISION,FOMC Rate Decision (Jan 27-28 meeting),federalreserve.gov/monetarypolicy/fomccalendars.htm,official_schedule
+2026-02-11,NFP,Employment Situation for January 2026,bls.gov release schedule,official_schedule
+2026-02-13,CPI,CPI release for January 2026,bls.gov release schedule,official_schedule
+2026-03-06,NFP,Employment Situation for February 2026,bls.gov release schedule,official_schedule
+2026-03-11,CPI,CPI release for February 2026,bls.gov release schedule,official_schedule
+2026-03-13,PCE,Personal Income and Outlays for January 2026,bea.gov release schedule,official_schedule
+2026-03-18,FOMC_DECISION,"FOMC Rate Decision (Mar 17-18 meeting, with SEP)",federalreserve.gov/monetarypolicy/fomccalendars.htm,official_schedule
+2026-04-03,NFP,Employment Situation for March 2026,bls.gov release schedule,official_schedule
+2026-04-09,PCE,Personal Income and Outlays for February 2026,bea.gov release schedule,official_schedule
+2026-04-10,CPI,CPI release for March 2026,bls.gov release schedule,official_schedule
+2026-04-29,FOMC_DECISION,FOMC Rate Decision (Apr 28-29 meeting),federalreserve.gov/monetarypolicy/fomccalendars.htm,official_schedule
+2026-04-30,PCE,Personal Income and Outlays for March 2026,bea.gov release schedule,official_schedule
+2026-05-08,NFP,Employment Situation for April 2026,bls.gov release schedule,official_schedule
+2026-05-12,CPI,CPI release for April 2026,bls.gov release schedule,official_schedule
+2026-05-28,PCE,Personal Income and Outlays for April 2026,bea.gov release schedule,official_schedule
+2026-06-05,NFP,Employment Situation for May 2026,bls.gov release schedule,official_schedule
+2026-06-10,CPI,CPI release for May 2026,bls.gov release schedule,official_schedule
+2026-06-17,FOMC_DECISION,"FOMC Rate Decision (Jun 16-17 meeting, with SEP)",federalreserve.gov/monetarypolicy/fomccalendars.htm,official_schedule
+2026-06-25,PCE,Personal Income and Outlays for May 2026,bea.gov release schedule,official_schedule

@@ -1,0 +1,17 @@
+# Ticker renames inside the study window.
+#
+# A rename is not a delisting, but data providers model it as one: the old
+# symbol is flagged delisted on the rename date and a new symbol carries the
+# full back-history. Treating the old symbol as the company therefore truncates
+# its price series, loses its later earnings, and — because providers drop
+# fundamentals for "delisted" symbols — removes its financial statements
+# entirely. All three effects were observed here.
+#
+# Detected by matching company names of delisted symbols against active symbols
+# with a long history. The `new_symbol` is canonical throughout this dataset;
+# `old_symbol` appears only in this file.
+#
+old_symbol,new_symbol,company,rename_date,note
+MMC,MRSH,Marsh & McLennan Companies,2026-01-14,rebranded to Marsh effective January 2026
+BK,BNY,The Bank of New York Mellon Corporation,2026-05-21,rebranded to BNY
+FI,FISV,"Fiserv, Inc.",2025-11-11,ticker reverted to FISV

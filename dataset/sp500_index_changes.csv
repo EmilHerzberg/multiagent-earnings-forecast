@@ -1,0 +1,119 @@
+# S&P 500 constituent changes during the study window (2025-01-01 .. 2026-06-30).
+#
+# Used to reconstruct point-in-time index membership, so an event only counts
+# when the company was actually an index member on its reaction day.
+#
+# confidence:
+#   verified    effective date confirmed against an S&P Dow Jones Indices press release
+#   aggregator  taken from a secondary change log; date NOT independently confirmed
+#
+# After the 2026-08 verification pass 50 of the 59 rows are verified. The 9 that
+# are still aggregator are the eight rows of the 2026-03-23 rebalance (no press
+# release was checked for them in that pass) and the 2026-06-01 FedEx Freight
+# addition, where a release exists but contradicts itself - see the note on that
+# row. Aggregator is what 10_validate.py counts when it warns about events near
+# an unconfirmed membership boundary, so the FedEx Freight row is deliberately
+# left aggregator to keep that warning firing.
+#
+# Eight change groups (13 rows) turned out to carry a wrong effective_date and
+# were corrected in that pass. Each corrected row keeps the superseded value in
+# its note ("was <old date> from a secondary log; press release says <new date>")
+# so the correction can be re-checked against the release instead of trusted.
+#
+# For removals caused by a company ceasing to trade (acquisition, take-private,
+# ticker rename), 01_load_index_membership.py overrides the date below with the
+# day after the last observed price bar, which is derived from the price data
+# itself and is authoritative for when the security stopped being investable.
+# The date here is then only a fallback.
+#
+# Known gap (NOT fixed here): the 2025-10-27 release also deletes Eastman
+# Chemical (EMN) from the S&P 500 effective 2025-11-04. This file has no EMN row
+# at all, so the loader treats EMN as an index member for the whole window.
+# Adding a missing constituent change was outside the scope of that pass.
+#
+# Row order: no row was moved during the corrections - each group shifted into
+# the slot the next group had wrongly occupied, so the file is still sorted by
+# effective_date. The loader keys on symbol and does not depend on row order.
+#
+# Verified sources:
+#   2025-03-24  https://press.spglobal.com/2025-03-07-DoorDash,-TKO-Group-Holdings,-Williams-Sonoma-and-Expand-Energy-Set-to-Join-S-P-500
+#   2025-05-19  https://press.spglobal.com/2025-05-12-Coinbase-Global-Set-to-Join-S-P-500
+#   2025-07-09  https://press.spglobal.com/2025-07-02-Datadog-Set-to-Join-S-P-500
+#   2025-07-18  https://press.spglobal.com/2025-07-14-The-Trade-Desk-Set-to-Join-S-P-500
+#   2025-07-23  https://press.spglobal.com/2025-07-18-Block-Set-to-Join-S-P-500
+#   2025-08-28  https://press.spglobal.com/2025-08-25-Interactive-Brokers-Group-Set-to-Join-S-P-500,-Talen-Energy-to-Join-S-P-MidCap-400-and-Kinetik-Holdings-to-Join-S-P-SmallCap-600
+#   2025-09-22  https://press.spglobal.com/2025-09-05-AppLovin,-Robinhood-Markets-and-Emcor-Group-Set-to-Join-S-P-500-Others-to-Join-S-P-100,-S-P-MidCap-400-and-S-P-SmallCap-600
+#   2025-10-31  https://press.spglobal.com/2025-10-27-Solstice-Advance-Materials-and-Qnity-Electronics-Set-to-Join-S-P-500-Others-to-Join-S-P-SmallCap-600
+#   2025-11-04  https://press.spglobal.com/2025-10-27-Solstice-Advance-Materials-and-Qnity-Electronics-Set-to-Join-S-P-500-Others-to-Join-S-P-SmallCap-600
+#   2025-11-28  https://press.spglobal.com/2025-11-24-Sandisk-Set-to-Join-S-P-500-Upwork,-First-Interstate-BancSystem,-PTC-Therapeutics-to-Join-S-P-SmallCap-600
+#   2025-12-11  https://press.spglobal.com/2025-12-08-Ares-Management-Set-to-Join-S-P-500-Sezzle-and-Vital-Farms-to-Join-S-P-SmallCap-600
+#   2025-12-22  https://press.spglobal.com/2025-12-05-CRH,-Carvana-and-Comfort-Systems-USA-Set-to-Join-S-P-500
+#   2026-02-09  https://press.spglobal.com/2026-02-04-Ciena-Set-to-Join-S-P-500-Arrowhead-Pharmaceuticals-to-Join-S-P-MidCap-400-ADT-and-OneSpaWorld-Holdings-to-Join-S-P-SmallCap-600
+#   2026-04-09  https://press.spglobal.com/2026-04-06-Caseys-General-Stores-Set-to-Join-S-P-500-DigitalOcean-Holdings-to-Join-S-P-MidCap-400-Broadstone-Net-Lease-to-Join-S-P-SmallCap-600
+#   2026-05-07  https://press.spglobal.com/2026-04-30-Veeva-Systems-Set-to-Join-S-P-500
+#   2026-06-02  https://press.spglobal.com/2026-05-27-FedEx-Freight-Holding-Company-Set-to-Join-S-P-500-EPAM-Systems-and-Dave-to-Join-S-P-SmallCap-600
+#   2026-03-23  https://press.spglobal.com/2026-03-06-Vertiv-Holdings,-Lumentum-Holdings,-Coherent,-and-EchoStar-Set-to-Join-S-P-500-Others-to-Join-S-P-100,-S-P-MidCap-400,-and-S-P-SmallCap-600
+#   2026-06-22  https://press.spglobal.com/2026-06-05-Marvell-Technology-and-Flex-Set-to-Join-S-P-500
+#   2026-06-29  https://press.spglobal.com/2026-06-23-Honeywell-Aerospace-Set-to-Join-S-P-500-S-P-100-Others-to-Join-S-P-MidCap-400-and-S-P-SmallCap-600
+#   2026-06-30  https://press.spglobal.com/2026-06-23-Honeywell-Aerospace-Set-to-Join-S-P-500-S-P-100-Others-to-Join-S-P-MidCap-400-and-S-P-SmallCap-600
+#
+effective_date,action,symbol,company,confidence,note
+2025-03-24,add,DASH,DoorDash,verified,replaced BorgWarner
+2025-03-24,remove,BWA,BorgWarner,verified,market capitalisation
+2025-03-24,add,TKO,TKO Group Holdings,verified,replaced Teleflex
+2025-03-24,remove,TFX,Teleflex,verified,market capitalisation
+2025-03-24,add,WSM,Williams-Sonoma,verified,replaced Celanese
+2025-03-24,remove,CE,Celanese,verified,market capitalisation
+2025-03-24,add,EXE,Expand Energy,verified,replaced FMC
+2025-03-24,remove,FMC,FMC Corporation,verified,market capitalisation
+2025-05-19,add,COIN,Coinbase Global,verified,replaced Discover Financial
+2025-05-19,remove,DFS,Discover Financial,verified,acquired by Capital One
+2025-07-09,add,DDOG,Datadog,verified,replaced Juniper Networks
+2025-07-09,remove,JNPR,Juniper Networks,verified,acquired by HPE
+2025-07-18,add,TTD,The Trade Desk,verified,replaced ANSYS
+2025-07-18,remove,ANSS,ANSYS,verified,acquired by Synopsys
+2025-07-23,add,XYZ,Block,verified,replaced Hess; was 2025-07-21 from a secondary log; press release says 2025-07-23
+2025-07-23,remove,HES,Hess,verified,acquired by Chevron; was 2025-07-21 from a secondary log; press release says 2025-07-23
+2025-08-28,add,IBKR,Interactive Brokers Group,verified,replaced Walgreens Boots Alliance; was 2025-08-29 from a secondary log; press release says 2025-08-28
+2025-08-28,remove,WBA,Walgreens Boots Alliance,verified,taken private by Sycamore; was 2025-08-29 from a secondary log; press release says 2025-08-28
+2025-09-22,add,APP,AppLovin,verified,replaced MarketAxess; was 2025-08-28 from a secondary log; press release says 2025-09-22 (September quarterly rebalance announced 2025-09-05)
+2025-09-22,remove,MKTX,MarketAxess,verified,market capitalisation; was 2025-08-28 from a secondary log; press release says 2025-09-22 (September quarterly rebalance announced 2025-09-05)
+2025-09-22,add,HOOD,Robinhood Markets,verified,replaced Caesars Entertainment
+2025-09-22,remove,CZR,Caesars Entertainment,verified,market capitalisation
+2025-09-22,add,EME,Emcor,verified,replaced Enphase Energy
+2025-09-22,remove,ENPH,Enphase Energy,verified,market capitalisation
+2025-10-31,add,SOLS,Solstice Advanced Materials,verified,spin-off from Honeywell; was 2025-10-30 from a secondary log (the spin-off completion date); press release says 2025-10-31
+2025-10-31,remove,KMX,CarMax,verified,market capitalisation
+2025-11-04,add,Q,Qnity Electronics,verified,spin-off from DuPont; was 2025-11-03 from a secondary log (the spin-off completion date); press release says 2025-11-04
+2025-11-28,add,SNDK,SanDisk,verified,replaced Interpublic Group; was 2025-11-04 from a secondary log; press release says 2025-11-28
+2025-11-28,remove,IPG,Interpublic Group,verified,acquired by Omnicom; was 2025-11-04 from a secondary log; press release says 2025-11-28
+2025-12-11,add,ARES,Ares Management,verified,replaced Kellanova; was 2025-11-28 from a secondary log; press release says 2025-12-11
+2025-12-11,remove,K,Kellanova,verified,acquired by Mars; was 2025-11-28 from a secondary log; press release says 2025-12-11
+2025-12-22,remove,MHK,Mohawk Industries,verified,market capitalisation; was 2025-12-11 from a secondary log; press release says 2025-12-22 (December quarterly rebalance)
+2025-12-22,add,FIX,Comfort Systems USA,verified,December rebalance
+2025-12-22,add,CRH,CRH,verified,December rebalance
+2025-12-22,add,CVNA,Carvana,verified,December rebalance
+2025-12-22,remove,LKQ,LKQ Corporation,verified,market capitalisation
+2025-12-22,remove,SOLS,Solstice Advanced Materials,verified,market capitalisation
+2026-02-09,add,CIEN,Ciena,verified,replaced Dayforce
+2026-02-09,remove,DAY,Dayforce,verified,acquired by Thoma Bravo
+2026-03-23,add,VRT,Vertiv,verified,March 2026 quarterly rebalance
+2026-03-23,remove,MTCH,Match Group,verified,market capitalisation
+2026-03-23,add,LITE,Lumentum,verified,March 2026 quarterly rebalance
+2026-03-23,remove,MOH,Molina Healthcare,verified,market capitalisation
+2026-03-23,add,COHR,Coherent,verified,March 2026 quarterly rebalance
+2026-03-23,remove,LW,Lamb Weston,verified,market capitalisation
+2026-03-23,add,SATS,EchoStar,verified,March 2026 quarterly rebalance
+2026-03-23,remove,PAYC,Paycom,verified,market capitalisation
+2026-04-09,add,CASY,Caseys General Stores,verified,replaced Hologic
+2026-04-09,remove,HOLX,Hologic,verified,acquired by Blackstone and TPG
+2026-05-07,add,VEEV,Veeva Systems,verified,replaced Coterra Energy
+2026-05-07,remove,CTRA,Coterra Energy,verified,acquired by Devon Energy
+2026-06-01,add,FDXF,FedEx Freight,aggregator,spin-off from FedEx; the 2026-05-27 release contradicts itself: its summary table says 2026-06-01 and its prose says 2026-06-02; date kept per the table; unverified until the S&P PDF is read
+2026-06-02,remove,EPAM,EPAM Systems,verified,market capitalisation
+2026-06-22,add,MRVL,Marvell Technology,verified,replaced Pool Corporation
+2026-06-22,remove,POOL,Pool Corporation,verified,market capitalisation
+2026-06-22,add,FLEX,Flex,verified,replaced Campbell's
+2026-06-22,remove,CPB,The Campbells Company,verified,market capitalisation
+2026-06-29,add,HONA,Honeywell Aerospace,verified,spin-off from Honeywell
+2026-06-30,remove,CAG,Conagra Brands,verified,market capitalisation

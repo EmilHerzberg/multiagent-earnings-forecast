@@ -15,8 +15,29 @@ dataset/    the event dataset: build scripts, curated inputs, schema
 docs/       the pre-registered analysis plan and the decision register
 harness/    the experiment harness (git submodule; a fork of
             ForesightFlow/coordination-experiment, MIT)
-results/    scored outputs and result reports of the run
 ```
+
+The run's outputs live where the scoring scripts expect them, under
+`dataset/scaffold/pilot5/` (per-event model outcomes, token counts, scored
+rows, reports) and `dataset/scaffold/RESULTS_2026-09-09/` (the four result
+reports of the pre-registered analysis, the timing sensitivity and the
+exploratory block). Scripts 24 and 27 resolve that folder relative to the
+dataset directory, so nothing has to be configured.
+
+Clone with the harness in one step:
+
+```
+git clone --recurse-submodules https://github.com/EmilHerzberg/multiagent-earnings-forecast.git
+```
+
+## Large run artefacts
+
+Not in git because of their size: the per-call token ledgers
+(`L1/L2_ledger5.jsonl`, 198 and 177 MB) and the per-event transcripts
+(`L1/L2_transcript*.md`, 29 to 79 MB). They are attached to the GitHub
+release of this repository. The raw request logs (`L1/L2_runs_raw.jsonl`,
+343 and 533 MB) contain every prompt including licensed vendor text and are
+available from the author on request.
 
 The dataset is rebuilt from the provider APIs, not shipped: `thesis.db`
 contains licensed vendor data and stays out of the repository. Building it

@@ -1,0 +1,9 @@
+# rebuilt from the APIs, never committed
+*.db
+*.db-*
+*.db.pre-*
+.env
+__pycache__/
+*.pyc
+# provider-derived evidence packs: rebuild with scripts/20_build_evidence_packs.py
+scaffold/pilot5/evidence_packs*.json
