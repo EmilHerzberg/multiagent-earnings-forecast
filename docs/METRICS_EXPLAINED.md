@@ -279,7 +279,7 @@ You measured it on your own baseline:
 
 Your logistic baseline has **no discrimination**. Raw, it appeared to have a little. With ten bins the corrected value goes negative — the honest verdict.
 
-Why this is critical for you specifically: **the study expects resolution near zero.** So the artefact and the finding live in the same numerical neighbourhood. Without the correction you could report "the debate achieved resolution 0.002!" when 0.002 was thin-bin noise. This is exactly the trap your working document §6.5 anticipated, and now you have measured proof it's real in your data.
+Why this is critical for you specifically: **the study expects resolution near zero.** So the artefact and the finding live in the same numerical neighbourhood. Without the correction you could report "the debate achieved resolution 0.002!" when 0.002 was thin-bin noise. This is exactly the trap the design notes §6.5 anticipated, and now you have measured proof it's real in your data.
 
 ### It has to correct the bins that were actually scored
 
