@@ -68,8 +68,9 @@ templates are in `harness/pilot/prompts.ts`.
 
 ## Decision references
 
-The thesis and the analysis plan cite design decisions as D1 … D32. They
-resolve in `docs/DECISIONS.md`.
+The pre-registered analysis plan cites design decisions as D1 … D32 (the
+thesis itself describes the decisions in prose). They resolve in
+`docs/DECISIONS.md`.
 
 ## Known errata of the frozen inputs
 

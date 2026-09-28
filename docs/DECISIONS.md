@@ -161,7 +161,7 @@ Superseded in part by D21.
 **Rejected:**
 - Two closely matched models: cleaner contrast, weaker external validity.
 
-Superseded in part by D24; extended by D29.
+Superseded in part by D24; extended by D29. Note on "serving precision": when this decision was taken the reasoning arm was served at fp8 and the non-reasoning arm at fp4, so the two differed in precision as well. D24 moved the non-reasoning arm to an fp8 endpoint two days later, and the full run was made with both arms at fp8. From D24 onward the arms differ in family, scale and architecture, not in serving precision; the pre-registered plan's wording "(family, scale, architecture, serving precision)" predates the run and is stale on that fourth point.
 
 ## D21 — Peer headers changed to prose
 **Date:** 2026-08-27
@@ -194,6 +194,8 @@ Superseded in part by D24; extended by D29.
 **Rejected:**
 - Format non-compliance, quantisation and rate limiting: each ruled out by measurement.
 - Falling back to a third model.
+
+Consequence: the new endpoint serves the model at fp8 instead of fp4, so after this decision both arms run at the same serving precision (see the note under D20).
 
 ## D25 — Compute matching re-affirmed on real data
 **Date:** 2026-08-28
