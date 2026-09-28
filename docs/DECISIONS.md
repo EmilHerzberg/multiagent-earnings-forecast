@@ -1,11 +1,11 @@
 # Design decisions D1–D32
 
-This register is a distilled record of the design decisions behind the experiment, kept so that references such as "D28" in the thesis resolve to a stable entry. Each entry keeps the binding decision, its reason, and the alternatives that were rejected. Session narrative, chat exchanges and working notes are deliberately omitted.
+This register is a distilled record of the design decisions behind the experiment, kept so that references such as "D28" in the working records resolve to a stable entry. Each entry keeps the binding decision, its reason, and the alternatives that were rejected. Session narrative, chat exchanges and working notes are deliberately omitted.
 
 ## D1 — The aggregator is blind
 **Date:** 2026-08-25
 **Decision:** The aggregating agent receives only the workers' reasoning sections — no evidence, no peer probabilities.
-**Why:** The exposé commits to this mechanism, and blindness is what makes the rung attributable: with the evidence the aggregator would be a fourth independent analyst. The risk that relevant evidence never reaches it is disclosed, and mitigated by a shared instruction requiring data-grounded arguments on every rung.
+**Why:** The original study design commits to this mechanism, and blindness is what makes the rung attributable: with the evidence the aggregator would be a fourth independent analyst. The risk that relevant evidence never reaches it is disclosed, and mitigated by a shared instruction requiring data-grounded arguments on every rung.
 **Rejected:**
 - Aggregator with the evidence: destroys attribution.
 - Filter-workers forwarding curated evidence: voids the shared-worker baseline.
@@ -150,14 +150,14 @@ Superseded in part by D21.
 ## D19 — Probabilities combined by the arithmetic mean
 **Date:** 2026-08-26
 **Decision:** The arithmetic mean combines probabilities, in the communication-free rung and the debate's final round alike.
-**Why:** The exposé commits to averaging because it preserves the information the Brier score evaluates. The score is convex, so the mean never scores worse than the typical individual and gains exactly the forecasters' diversity.
+**Why:** The original study design commits to averaging because it preserves the information the Brier score evaluates. The score is convex, so the mean never scores worse than the typical individual and gains exactly the forecasters' diversity.
 **Rejected:**
 - The median: discards two of three values at N=3 and suppresses the dissent under study.
 
 ## D20 — Roster: two deliberately dissimilar arms
 **Date:** 2026-08-26
 **Decision:** A 32B dense reasoning model with reasoning on and a 671B mixture-of-experts non-reasoning model, differing as much as possible in family, scale, architecture and serving precision.
-**Why:** This meets the exposé's requirement of one reasoning and one non-reasoning model, and since RQ1 and RQ2 are within-model, varying the model buys a robustness probe. With four dimensions varying at once, a difference between arms cannot be attributed to reasoning.
+**Why:** This meets the study design's requirement of one reasoning and one non-reasoning model, and since RQ1 and RQ2 are within-model, varying the model buys a robustness probe. With four dimensions varying at once, a difference between arms cannot be attributed to reasoning.
 **Rejected:**
 - Two closely matched models: cleaner contrast, weaker external validity.
 
@@ -182,7 +182,7 @@ Superseded in part by D24; extended by D29. Note on "serving precision": when th
 ## D23 — Compute matching
 **Date:** 2026-08-28
 **Decision:** The largest communicating structure's spend sets the ceiling per event and model; the communication-free rung is drawn in generation order until it is covered, shared workers first, and each structure is compared against the prefix fitting its own budget, in total tokens.
-**Why:** Total tokens follows the exposé's reasoning that more tokens mean more compute, and gives the baseline about 14 runs where completion-only gives about 10 — a stronger, conservative null. The fitting prefix under-funds the baseline and records the shortfall, and runs are never re-sorted.
+**Why:** Total tokens follows the study design's reasoning that more tokens mean more compute, and gives the baseline about 14 runs where completion-only gives about 10 — a stronger, conservative null. The fitting prefix under-funds the baseline and records the shortfall, and runs are never re-sorted.
 **Rejected:**
 - The prefix that covers the budget: over-funds the baseline.
 - Whichever prefix is closer: the bias direction varies event by event.
@@ -244,7 +244,7 @@ Disclosed: sample base rate 48.69 % against the population's 46.50 %, arising at
 ## D30 — The pre-registered analysis plan is frozen
 **Date:** 2026-09-05
 **Decision:** The plan is frozen before the full runs, settling three deferred choices: the self-context bucket stays out of the headline communication cost as its own metric; point estimates only; quality at matched budget and communication cost presented side by side.
-**Why:** Freezing fulfils the exposé's milestone that evaluation choices be fixed in writing before the runs. The documented stance is point estimation with pre-registered language — sign consistency across models, thin-cell flags — rather than a test weak at roughly 52 effective observations.
+**Why:** Freezing fulfils the study design's milestone that evaluation choices be fixed in writing before the runs. The documented stance is point estimation with pre-registered language — sign consistency across models, thin-cell flags — rather than a test weak at roughly 52 effective observations.
 **Rejected:**
 - Committing the calendar-week block bootstrap: kept as an optional post-hoc instrument.
 - Full multiplicity-corrected testing: contradicts the stance and is weak here.
@@ -253,7 +253,7 @@ Disclosed: sample base rate 48.69 % against the population's 46.50 %, arising at
 ## D31 — Amendment to the frozen plan after the adversarial review
 **Date:** 2026-09-05 (Parts 1–5); 2026-09-06 (Parts 6–7)
 **Decision:** The plan is amended in place with marked references: false or miscited statements corrected; the numeric noise anchor removed with no replacement; the RQ3 level gate and baseline reference curve committed; a tare-check negative control added; ties counted against coordination; the work list seed-shuffled with seed 20260905; a sign flip in a committed sensitivity check forcing the label "not robust"; the study window set to 2026-05-30.
-**Why:** Correcting false statements is not a loosening — the harness was fixed first, then the text rewritten to what is true. The anchor was never mandated by the exposé and went before any run data existed; the robustness trigger is the sign alone, since a threshold would reintroduce the cutoff just removed.
+**Why:** Correcting false statements is not a loosening — the harness was fixed first, then the text rewritten to what is true. The anchor was never mandated by the study design and went before any run data existed; the robustness trigger is the sign alone, since a threshold would reintroduce the cutoff just removed.
 **Rejected:**
 - Recomputing the stale baseline numbers rather than pinning the committed construction.
 - A smallest-effect-of-interest of 0.005 Brier: a quasi-test without justification.

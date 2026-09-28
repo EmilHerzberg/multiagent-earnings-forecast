@@ -1,8 +1,8 @@
 # What is in `thesis.db` — every table and every view
 
-_A reference for the 22 tables and 2 views that hold the thesis data. Written for someone new to Python and new to databases. Every number below was read out of the database itself; nothing is estimated._
+_A reference for the 22 tables and 2 views that hold the experiment's data. Written for someone new to Python and new to databases. Every number below was read out of the database itself; nothing is estimated._
 
-The file is `thesis/thesis.db`, 134 MB. It is opened **read-only** everywhere in this document — see §8 for how, and why that matters.
+The file is `dataset/thesis.db`, 134 MB. It is opened **read-only** everywhere in this document — see §8 for how, and why that matters.
 
 ---
 
@@ -294,7 +294,7 @@ Also worth knowing: `open`, `high` and `low` arrive from the provider on the raw
 
 Key: `(symbol, date)`; `symbol` is `'SPY'` on every row. Covers **2020-01-02 to 2026-06-30**. Written by `scripts/07_alphavantage_market_benchmark.py`.
 
-This is the "market" in *abnormal* return. The outcome the thesis forecasts is the stock's return **minus the market's return over the same days**, so a market series is not optional.
+This is the "market" in *abnormal* return. The outcome the experiment forecasts is the stock's return **minus the market's return over the same days**, so a market series is not optional.
 
 | column | type | meaning |
 |---|---|---|
@@ -926,7 +926,7 @@ Ten rows because there are ten settings. It is a **key/value table**, not a data
 | `level2_definition` | the full prose definition of tier 2 |
 | `level_boundary_rationale` | "Numeric market record vs. text and external conditions. Realised volatility is level 1, implied volatility (VIX) is level 2 — deliberately." |
 
-**Why it is worth having at all.** These are the four or five sentences a viva examiner will ask you to justify, and they live *inside the data file* rather than in a document that can drift away from it. A copy of `thesis.db` alone answers "what window?", "why 530?", and "which price column?" without any accompanying prose.
+**Why it is worth having at all.** These are the four or five sentences a reviewer will ask you to justify, and they live *inside the data file* rather than in a document that can drift away from it. A copy of `thesis.db` alone answers "what window?", "why 530?", and "which price column?" without any accompanying prose.
 
 ---
 

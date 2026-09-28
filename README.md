@@ -12,7 +12,7 @@ open-weight models.
 dataset/    the event dataset: build scripts, curated inputs, schema
             (dataset/README.md is the entry point; dataset/SCHEMA.md documents
             every table of the rebuilt database)
-docs/       the pre-registered analysis plan and the decision register
+docs/       the decision register and the blind checkpoint report
 harness/    the experiment harness (git submodule; a fork of
             ForesightFlow/coordination-experiment, MIT)
 ```
@@ -20,7 +20,7 @@ harness/    the experiment harness (git submodule; a fork of
 The run's outputs live where the scoring scripts expect them, under
 `dataset/scaffold/pilot5/` (per-event model outcomes, token counts, scored
 rows, reports) and `dataset/scaffold/RESULTS_2026-09-09/` (the four result
-reports of the pre-registered analysis, the timing sensitivity and the
+reports of the primary analysis, the timing sensitivity and the
 exploratory block). Scripts 24 and 27 resolve that folder relative to the
 dataset directory, so nothing has to be configured.
 
@@ -62,8 +62,8 @@ templates are in `harness/pilot/prompts.ts`.
 
 ## Decision references
 
-The pre-registered analysis plan cites design decisions as D1 … D32. They
-resolve in `docs/DECISIONS.md`.
+Design decisions are numbered D1 … D32 in the working records and resolve in
+`docs/DECISIONS.md`.
 
 ## Known errata of the frozen inputs
 

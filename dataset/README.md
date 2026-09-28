@@ -1,6 +1,6 @@
-# Thesis dataset — S&P 500 earnings, prices and fundamentals (2025 – mid-2026)
+# Event dataset — S&P 500 earnings, prices and fundamentals (2025 – mid-2026)
 
-Data pipeline for the bachelor thesis. Everything needed to rebuild the dataset
+Data pipeline for the experiment. Everything needed to rebuild the dataset
 from the provider APIs is in this folder.
 
 **Study window:** 2025-01-01 – 2026-06-30
@@ -215,7 +215,7 @@ re-dated **every** removal to the end of the data.
 
 Why 502 symbols carry `assumed_at_window_start`, how much rests on the
 unverified dates, and how to close it without a data licence: see
-`thesis_working_document_v1.md`, "Where the index-membership dates come from".
+the project's working notes (not part of this repository).
 
 ### Level-2 context tables
 
