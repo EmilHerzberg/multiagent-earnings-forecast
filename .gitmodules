@@ -1,4 +1,4 @@
 [submodule "harness"]
 	path = harness
 	url = https://github.com/EmilHerzberg/coordination-experiment.git
-	branch = thesis-pilot
+	branch = pilot

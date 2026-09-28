@@ -1,17 +1,17 @@
-# Does Multi-Agent Orchestration Earn Its Tokens?
+# Compute-matched evaluation of multi-agent LLM structures on post-earnings forecasting
 
-Reproduction materials for a bachelor thesis that compares three multi-agent
-LLM structures (repetition, aggregator, debate) against a compute-matched
+Materials to reproduce an experiment that compares three multi-agent LLM
+structures (repetition, aggregator, debate) against a compute-matched
 single-agent baseline at forecasting the sign of the five-day post-earnings
-abnormal return of S&P 500 companies (840 events, two evidence levels, two
-open-weight models).
+abnormal return of S&P 500 companies: 840 events, two evidence levels, two
+open-weight models.
 
 ## Layout
 
 ```
 dataset/    the event dataset: build scripts, curated inputs, schema
             (dataset/README.md is the entry point; dataset/SCHEMA.md documents
-            every table of the rebuilt thesis.db)
+            every table of the rebuilt database)
 docs/       the pre-registered analysis plan and the decision register
 harness/    the experiment harness (git submodule; a fork of
             ForesightFlow/coordination-experiment, MIT)
@@ -30,16 +30,10 @@ Clone with the harness in one step:
 git clone --recurse-submodules https://github.com/EmilHerzberg/multiagent-earnings-forecast.git
 ```
 
-## Large run artefacts
+The source archives attached to a release do not contain the submodule; use
+the clone command above or fetch the harness fork separately.
 
-Not in git because of their size: the per-call token ledgers
-(`L1/L2_ledger5.jsonl`, 198 and 177 MB) and the per-event transcripts
-(`L1/L2_transcript*.md`, 29 to 79 MB). They are attached to the GitHub
-release of this repository. The raw request logs (`L1/L2_runs_raw.jsonl`,
-343 and 533 MB) contain every prompt including licensed vendor text and are
-available from the author on request.
-
-The dataset is rebuilt from the provider APIs, not shipped: `thesis.db`
+The dataset is rebuilt from the provider APIs, not shipped: the database
 contains licensed vendor data and stays out of the repository. Building it
 needs an EODHD subscription (prices, earnings, master data) and an Alpha
 Vantage premium key (income statements, news); see `dataset/README.md`
@@ -47,7 +41,7 @@ section 1 for the minimum plans.
 
 ## Reproduction, in order
 
-1. `dataset/`: `python run_all.py` builds `thesis.db` (section 2 of
+1. `dataset/`: `python run_all.py` builds the database (section 2 of
    `dataset/README.md`), `scripts/25_select_event_sample.py` reproduces the
    840-event sample (seed 20260903, fixed in the script), and
    `scripts/20_build_evidence_packs.py` writes the evidence packs the agents
@@ -55,22 +49,21 @@ section 1 for the minimum plans.
 2. `harness/`: `pilot/real-run.sh <1|2>` runs one evidence level against
    OpenRouter; the run is resumable and cost-capped.
 3. `dataset/scripts/24_score_experiment.py` joins the harness outputs to the
-   truth in `thesis.db` and answers the three research questions.
+   truth in the database and answers the three research questions.
 
 ## Evidence packs are not shipped
 
 The packs embed vendor data (EPS figures, prices, ratios, news summaries)
 that the providers do not license for redistribution. Script 20 rebuilds
-them deterministically from a rebuilt `thesis.db`. Caveat: providers revise
+them deterministically from a rebuilt database. Caveat: providers revise
 figures after the fact (restated EPS, corrected bars), so a later rebuild can
 differ from the packs the run used in individual values. The exact prompt
 templates are in `harness/pilot/prompts.ts`.
 
 ## Decision references
 
-The pre-registered analysis plan cites design decisions as D1 … D32 (the
-thesis itself describes the decisions in prose). They resolve in
-`docs/DECISIONS.md`.
+The pre-registered analysis plan cites design decisions as D1 … D32. They
+resolve in `docs/DECISIONS.md`.
 
 ## Known errata of the frozen inputs
 
@@ -86,3 +79,12 @@ kept unchanged. A later check against a current constituent list found:
   row for it.
 
 None of the three companies is in the 840-event sample.
+
+## Large run artefacts
+
+Not in git because of their size: the per-call token ledgers
+(`L1/L2_ledger5.jsonl`, 198 and 177 MB) and the per-event transcripts
+(`L1/L2_transcript*.md`, 29 to 79 MB). They are attached to the GitHub
+release of this repository. The raw request logs (`L1/L2_runs_raw.jsonl`,
+343 and 533 MB) contain every prompt including licensed vendor text and are
+available on request.
