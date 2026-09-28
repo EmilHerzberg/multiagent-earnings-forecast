@@ -88,3 +88,15 @@ Not in git because of their size: the per-call token ledgers
 release of this repository. The raw request logs (`L1/L2_runs_raw.jsonl`,
 343 and 533 MB) contain every prompt including licensed vendor text and are
 available on request.
+
+## Licence
+
+MIT, see `LICENSE`. It covers the scripts, configuration, documentation and
+run outputs in this repository. It does not cover third-party data files
+redistributed here for convenience, which remain under their publishers'
+terms: `ai_gpr_daily.csv` (Caldara & Iacoviello, Federal Reserve Board),
+`tpu_daily.csv` (Caldara et al.), `epu_daily.csv` (Baker, Bloom & Davis,
+policyuncertainty.com), `vix_daily.csv` (Cboe Global Markets), the S&P Dow
+Jones Indices constituent changes recorded in `sp500_index_changes*.csv`, and
+the SPDR S&P 500 ETF holdings file `raw_spy_holdings_2026-09-21.xlsx` (State
+Street). The `harness/` submodule carries its own MIT licence.

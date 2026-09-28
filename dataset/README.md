@@ -73,7 +73,7 @@ interrupted run can be continued without re-spending quota.
 ## 3. Layout
 
 ```
-thesis/
+dataset/
 ├── README.md
 ├── run_all.py                 build everything
 ├── config.py                  study parameters + provider access layer
