@@ -369,7 +369,7 @@ on that cell's finding (plan §8, D31/II-7).
 
 The curve itself is committed (§6.2 above). Reading it as 'a debate
 advantage that disappears once the baseline is given the same number of
-runs was averaging, not coordination' is an interpretation the exposé
+runs was averaging, not coordination' is an interpretation the study design
 does not commit to. EXPLORATORY: reported as such, never a headline.
 
 - EXPLORATORY deepseek-chat-v3-0324 / L1: brier 0.2677 at k=1 -> 0.2671 at k=20 (averaging alone moved it -0.0006).

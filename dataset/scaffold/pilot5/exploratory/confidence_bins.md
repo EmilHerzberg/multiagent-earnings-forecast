@@ -1,6 +1,6 @@
 # EXPLORATORY — forecast quality by stated confidence (plan §9)
 
-Not in the exposé, no confirmatory language, no headline. Computed once on
+Not in the study design, no confirmatory language, no headline. Computed once on
 `scored.jsonl` (primary Block-III output), three genuine rungs only
 (repetition, aggregator, debate): 10080 forecasts on 840 events × 2
 models × 2 levels. Bins with fewer than 20 forecasts are marked `thin` and
