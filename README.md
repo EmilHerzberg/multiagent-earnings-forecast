@@ -69,7 +69,9 @@ The analysis plan cites design decisions as D1 … D32; they resolve in
 ## Known errata of the frozen inputs
 
 The curated membership files in `dataset/` are the ones the run used and are
-kept unchanged. A later check against a current constituent list found:
+kept unchanged. Rolling the SPY holdings of 2026-09-21 back to the window
+start (`dataset/scripts/31_membership_anchor_rollback.py`) and comparing with
+them found:
 
 - Apollo Global Management (APO) joined the index on 2024-12-23 and is
   missing from the universe; its six in-window earnings events are absent

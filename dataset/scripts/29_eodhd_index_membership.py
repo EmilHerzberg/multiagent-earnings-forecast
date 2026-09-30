@@ -9,12 +9,12 @@ curated membership inputs of this dataset.
 Why this script exists
 ----------------------
 The point-in-time membership used by ``09_build_events.py`` rests on two
-curated files: ``sp500_constituents.txt`` (the union universe, with the
-window-start members *assumed*) and ``sp500_index_changes.csv`` (59 additions
-and removals, dated from S&P Dow Jones Indices press releases). The change
-dates are verified; the base list is not evidenced, because no free citable
-constituent list as of 2025-01-01 was available when the dataset was built
-(README section 7.1).
+curated files: ``sp500_constituents.txt`` (the 530-symbol working list; the
+companies without an addition row are treated as members from the window
+start) and ``sp500_index_changes.csv`` (59 additions and removals, dated from
+S&P Dow Jones Indices press releases). Window-start membership is anchored on
+the SPY holdings and checked by rolling the changes back
+(``31_membership_anchor_rollback.py``, README section 7.1).
 
 EODHD's index fundamentals carry that history for the S&P 500 since April
 2012. This script fetches it, turns it into the same two input files, and
@@ -299,7 +299,7 @@ def compare(merged: dict[str, dict], universe: list[str], changes: list[dict],
     multi = [s for s, m in merged.items() if m["multi_span"] and m["touches_window"]]
     _list("window tickers with several spans (left and rejoined)", multi)
 
-    _section(f"Members on {config.START_DATE} (the base list the study assumed)")
+    _section(f"Members on {config.START_DATE} (the dataset's window-start membership)")
     cur_added = {r["symbol"] for r in cur_rows if r["action"] == "add"}
     cur_base = cur_universe - cur_added
     eodhd_base = set(base)

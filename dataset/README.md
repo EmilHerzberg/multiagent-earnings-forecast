@@ -213,9 +213,9 @@ by more than a week — the panel ends ragged because a vendor backfill does not
 finish in one session, and comparing against the study-window end instead once
 re-dated **every** removal to the end of the data.
 
-Why 502 symbols carry `assumed_at_window_start`, how much rests on the
-unverified dates, and how to close it without a data licence: see
-the project's working notes (not part of this repository).
+Why 502 symbols carry `assumed_at_window_start` and how that membership was
+checked against the SPY anchor: see limitation 7.1 and
+`scripts/31_membership_anchor_rollback.py`.
 
 ### Level-2 context tables
 
@@ -384,20 +384,32 @@ intervals live in `index_membership`, built from `sp500_index_changes.csv`
 was actually a member on the reaction day, so **the point-in-time sample is
 `WHERE in_index_at_t0 = 1`**.
 
-Why this mattered: the original 501-symbol list turned out to approximate
-membership at the *start* of the window, not the end. It therefore retained
-most companies later removed (the eventual losers) and omitted 27 companies
-added during the window (COIN, HOOD, APP, CVNA, DASH, …) — a conservative
-distortion, but a distortion. Reconstruction adds those 27 plus 5 missing
-removals (BWA, DFS, FMC, SOLS, TFX).
+Where the membership comes from. A change log alone cannot say who was a
+member on the first day of the window; that takes one complete list at one
+date. The anchor is the equity holdings of the SPDR S&P 500 ETF Trust (SPY)
+as published by the fund on ssga.com (`sp500_constituents_current_2026-09-21.csv`,
+source in the header). The additions and removals in `sp500_index_changes.csv`
+were identified from S&P Dow Jones Indices press releases and traced backwards
+from that anchor; `sp500_index_changes_after_window.csv` holds the changes
+between the window end and the anchor date that the roll-back also has to
+undo. `sp500_constituents.txt` is the 530-symbol working list — every company
+that was a member at some point in the window, not the index on one date — and
+companies without an addition row are treated as members from the window
+start (`from_source = 'assumed_at_window_start'`).
 
-Date provenance is recorded per row. Effective dates for 2025-03-24,
-2025-05-19, 2025-07-09, 2025-12-22 and 2026-06-22 were confirmed against S&P
-Dow Jones Indices press releases (`confidence = verified`); the rest come from
-secondary change logs (`confidence = aggregator`). Two aggregator dates were
-found to be wrong when checked against the press releases — COIN/DFS and
-DDOG/JNPR were both listed with the wrong effective date — so the unverified
-dates should be treated as approximate.
+`scripts/31_membership_anchor_rollback.py` performs the roll-back and compares
+it with that working list. Result: the two agree on 501 of 502 window-start
+members; the roll-back adds Apollo Global Management (APO, added 2024-12-23,
+missing from the working list) and cannot restore Eastman Chemical (EMN,
+removed 2025-11-04, no row in the change log). Both are recorded as known
+errata in the repository README.
+
+Date provenance is recorded per row. 58 of the 59 rows carry
+`confidence = verified`: the effective date was confirmed against the S&P Dow
+Jones Indices press release cited in the file header. The one `aggregator` row
+is the FedEx Freight addition, where the release gives two dates (2026-06-01
+in its table, 2026-06-02 in its prose); FDXF has no in-window prices and is
+not in the working list.
 
 Where a company stopped trading (acquisition, take-private, rename), the
 removal date is instead derived from the last observed price bar, which is
@@ -405,11 +417,13 @@ authoritative for when the security ceased to be investable
 (`to_source = 'price_series'`).
 
 **Residual weakness:** companies absent from the change file are assumed to
-have been members for the whole window. A company that both joined *and* left
-before the window would be missed entirely, and the base list itself is an
-approximation of membership on 2025-01-01. `10_validate.py` reports how many
-events sit within 30 days of a membership boundary, which bounds the damage any
-remaining date error can do.
+have been members for the whole window, and the roll-back check is only as
+good as the change log between the anchor and the window start — a change
+missing from the log propagates into the roll-back, which is exactly what the
+Eastman case shows. A company that both joined *and* left inside the window
+without a logged row would be missed entirely. `10_validate.py` reports how
+many events sit within 30 days of a membership boundary, which bounds the
+damage any remaining date error can do.
 
 **7.1b Three "delisted" companies were actually ticker renames.** Providers
 model a rename as a delisting: the old symbol is flagged dead on the rename
