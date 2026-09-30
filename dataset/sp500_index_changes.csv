@@ -1,62 +1,61 @@
-# S&P 500 constituent changes during the study window (2025-01-01 .. 2026-06-30).
+# S&P 500 constituent changes during the study window (2025-01-01 .. 2026-06-30):
+# 59 rows, 30 additions and 29 removals.
 #
-# Used to reconstruct point-in-time index membership, so an event only counts
-# when the company was actually an index member on its reaction day.
+# Used by scripts/09_build_events.py to reconstruct point-in-time index
+# membership, so an event only counts when the company was actually an index
+# member on its reaction day.
+#
+# How the rows were made. The changes were researched before the experiment in
+# the same work process as sp500_constituents.txt (manual steps, not fully
+# recorded). Every change was then checked against the official S&P Dow Jones
+# Indices press release listed below; 13 dates were corrected in that step and
+# each corrected row keeps the superseded value in its note. Except for FedEx
+# Freight, the release confirmed every date. The dates are therefore
+# documented; completeness is not: a change overlooked in the research cannot
+# be found by the check against the press releases either.
 #
 # confidence:
-#   verified    effective date confirmed against an S&P Dow Jones Indices press release
-#   aggregator  taken from a secondary change log; date NOT independently confirmed
+#   verified    effective date confirmed against the S&P DJI press release (58 rows)
+#   aggregator  not confirmed (1 row: the FedEx Freight addition, where the
+#               release gives 2026-06-01 in its table and 2026-06-02 in its
+#               prose; FDXF has no in-window prices and is not in the working
+#               list, so nothing depends on it)
 #
-# After the 2026-08 verification pass 50 of the 59 rows are verified. The 9 that
-# are still aggregator are the eight rows of the 2026-03-23 rebalance (no press
-# release was checked for them in that pass) and the 2026-06-01 FedEx Freight
-# addition, where a release exists but contradicts itself - see the note on that
-# row. Aggregator is what 10_validate.py counts when it warns about events near
-# an unconfirmed membership boundary, so the FedEx Freight row is deliberately
-# left aggregator to keep that warning firing.
+# Removals: scripts/09_build_events.py ends membership at the EARLIER of the
+# date below and the day after the last price bar (a security that stopped
+# trading before the index change). Six rows are overridden that way; see the
+# repository README, limitation 7.1.
 #
-# Eight change groups (13 rows) turned out to carry a wrong effective_date and
-# were corrected in that pass. Each corrected row keeps the superseded value in
-# its note ("was <old date> from a secondary log; press release says <new date>")
-# so the correction can be re-checked against the release instead of trusted.
+# Known omission: the 2025-10-27 release also removes Eastman Chemical (EMN)
+# effective 2025-11-04. This file has no EMN row, so the builder treats EMN as
+# a member for the whole window. Found after the experiment by
+# scripts/31_membership_anchor_rollback.py; the file is kept as the run used it.
 #
-# For removals caused by a company ceasing to trade (acquisition, take-private,
-# ticker rename), 01_load_index_membership.py overrides the date below with the
-# day after the last observed price bar, which is derived from the price data
-# itself and is authoritative for when the security stopped being investable.
-# The date here is then only a fallback.
+# Known symbol case: Paramount Global (PARA) merged into Skydance on 2025-08-07
+# and stayed in the index as PSKY; the price-based rule ended its membership
+# because the provider closed the PARA series. See the repository README.
 #
-# Known gap (NOT fixed here): the 2025-10-27 release also deletes Eastman
-# Chemical (EMN) from the S&P 500 effective 2025-11-04. This file has no EMN row
-# at all, so the loader treats EMN as an index member for the whole window.
-# Adding a missing constituent change was outside the scope of that pass.
+# The loader keys on symbol and does not depend on row order.
 #
-# Row order: no row was moved during the corrections - each group shifted into
-# the slot the next group had wrongly occupied, so the file is still sorted by
-# effective_date. The loader keys on symbol and does not depend on row order.
-#
-# Verified sources:
-#   2025-03-24  https://press.spglobal.com/2025-03-07-DoorDash,-TKO-Group-Holdings,-Williams-Sonoma-and-Expand-Energy-Set-to-Join-S-P-500
+# Sources (S&P Dow Jones Indices press releases):
+#   2025-03-24  https://press.spglobal.com/2025-03-07-DoorDash,-TKO-Group-Holdings,-Williams-Sonoma-and-Expand-Energy-Set-to-Join-S-P-500-Others-to-Join-S-P-100,-S-P-MidCap-400-and-S-P-SmallCap-600
 #   2025-05-19  https://press.spglobal.com/2025-05-12-Coinbase-Global-Set-to-Join-S-P-500
 #   2025-07-09  https://press.spglobal.com/2025-07-02-Datadog-Set-to-Join-S-P-500
 #   2025-07-18  https://press.spglobal.com/2025-07-14-The-Trade-Desk-Set-to-Join-S-P-500
 #   2025-07-23  https://press.spglobal.com/2025-07-18-Block-Set-to-Join-S-P-500
 #   2025-08-28  https://press.spglobal.com/2025-08-25-Interactive-Brokers-Group-Set-to-Join-S-P-500,-Talen-Energy-to-Join-S-P-MidCap-400-and-Kinetik-Holdings-to-Join-S-P-SmallCap-600
 #   2025-09-22  https://press.spglobal.com/2025-09-05-AppLovin,-Robinhood-Markets-and-Emcor-Group-Set-to-Join-S-P-500-Others-to-Join-S-P-100,-S-P-MidCap-400-and-S-P-SmallCap-600
-#   2025-10-31  https://press.spglobal.com/2025-10-27-Solstice-Advance-Materials-and-Qnity-Electronics-Set-to-Join-S-P-500-Others-to-Join-S-P-SmallCap-600
-#   2025-11-04  https://press.spglobal.com/2025-10-27-Solstice-Advance-Materials-and-Qnity-Electronics-Set-to-Join-S-P-500-Others-to-Join-S-P-SmallCap-600
+#   2025-10-31 / 2025-11-04  https://press.spglobal.com/2025-10-27-Solstice-Advance-Materials-and-Qnity-Electronics-Set-to-Join-S-P-500-Others-to-Join-S-P-SmallCap-600
 #   2025-11-28  https://press.spglobal.com/2025-11-24-Sandisk-Set-to-Join-S-P-500-Upwork,-First-Interstate-BancSystem,-PTC-Therapeutics-to-Join-S-P-SmallCap-600
 #   2025-12-11  https://press.spglobal.com/2025-12-08-Ares-Management-Set-to-Join-S-P-500-Sezzle-and-Vital-Farms-to-Join-S-P-SmallCap-600
-#   2025-12-22  https://press.spglobal.com/2025-12-05-CRH,-Carvana-and-Comfort-Systems-USA-Set-to-Join-S-P-500
+#   2025-12-22  https://press.spglobal.com/2025-12-05-CRH,-Carvana-and-Comfort-Systems-USA-Set-to-Join-S-P-500-Others-to-Join-S-P-MidCap-400-and-S-P-SmallCap-600
 #   2026-02-09  https://press.spglobal.com/2026-02-04-Ciena-Set-to-Join-S-P-500-Arrowhead-Pharmaceuticals-to-Join-S-P-MidCap-400-ADT-and-OneSpaWorld-Holdings-to-Join-S-P-SmallCap-600
+#   2026-03-23  https://press.spglobal.com/2026-03-06-Vertiv-Holdings,-Lumentum-Holdings,-Coherent,-and-EchoStar-Set-to-Join-S-P-500-Others-to-Join-S-P-100,-S-P-MidCap-400,-and-S-P-SmallCap-600
 #   2026-04-09  https://press.spglobal.com/2026-04-06-Caseys-General-Stores-Set-to-Join-S-P-500-DigitalOcean-Holdings-to-Join-S-P-MidCap-400-Broadstone-Net-Lease-to-Join-S-P-SmallCap-600
 #   2026-05-07  https://press.spglobal.com/2026-04-30-Veeva-Systems-Set-to-Join-S-P-500
-#   2026-06-02  https://press.spglobal.com/2026-05-27-FedEx-Freight-Holding-Company-Set-to-Join-S-P-500-EPAM-Systems-and-Dave-to-Join-S-P-SmallCap-600
-#   2026-03-23  https://press.spglobal.com/2026-03-06-Vertiv-Holdings,-Lumentum-Holdings,-Coherent,-and-EchoStar-Set-to-Join-S-P-500-Others-to-Join-S-P-100,-S-P-MidCap-400,-and-S-P-SmallCap-600
-#   2026-06-22  https://press.spglobal.com/2026-06-05-Marvell-Technology-and-Flex-Set-to-Join-S-P-500
-#   2026-06-29  https://press.spglobal.com/2026-06-23-Honeywell-Aerospace-Set-to-Join-S-P-500-S-P-100-Others-to-Join-S-P-MidCap-400-and-S-P-SmallCap-600
-#   2026-06-30  https://press.spglobal.com/2026-06-23-Honeywell-Aerospace-Set-to-Join-S-P-500-S-P-100-Others-to-Join-S-P-MidCap-400-and-S-P-SmallCap-600
-#
+#   2026-06-01 / 2026-06-02  https://press.spglobal.com/2026-05-27-FedEx-Freight-Holding-Company-Set-to-Join-S-P-500-EPAM-Systems-and-Dave-to-Join-S-P-SmallCap-600
+#   2026-06-22  https://press.spglobal.com/2026-06-05-Marvell-Technology-and-Flex-Set-to-Join-S-P-500-Others-to-Join-S-P-MidCap-400-and-S-P-SmallCap-600
+#   2026-06-29 / 2026-06-30  https://press.spglobal.com/2026-06-23-Honeywell-Aerospace-Set-to-Join-S-P-500-S-P-100-Others-to-Join-S-P-MidCap-400-and-S-P-SmallCap-600
 effective_date,action,symbol,company,confidence,note
 2025-03-24,add,DASH,DoorDash,verified,replaced BorgWarner
 2025-03-24,remove,BWA,BorgWarner,verified,market capitalisation

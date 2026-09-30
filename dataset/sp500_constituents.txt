@@ -1,6 +1,20 @@
-# Union of every company that was an S&P 500 member at any point in
-# 2025-01-01 .. 2026-06-30. Membership dates live in sp500_index_changes.csv;
-# an event only counts while the company was actually a member.
+# Working list: every company that belonged to the S&P 500 on at least one day
+# of 2025-01-01 .. 2026-06-30 (530 symbols), not the index on a single date.
+#
+# Made before the experiment. Starting point: the equity holdings of the SPDR
+# S&P 500 ETF Trust (SPY) as published on ssga.com, evaluated manually and with
+# an AI assistant (Claude) as a tool; the researched additions and removals in
+# sp500_index_changes.csv were then traced backwards from those holdings. The
+# retrieval day of the holdings was not recorded, and the manual steps were not
+# fully recorded, so the list cannot be traced step by step. Two retrospective
+# checks (scripts/31_membership_anchor_rollback.py and
+# scripts/32_membership_historical_list_check.py) agree with it on 501 of 502
+# window-start members; Apollo Global Management (APO) is the one member both
+# checks list and this file lacks (see the repository README, known errata).
+#
+# Membership dates live in sp500_index_changes.csv; an event only counts while
+# the company was actually a member. A company without an addition row counts
+# as a member from 2025-01-01 (502 of the 530).
 # Renamed tickers appear under their new symbol (see ticker_renames.csv).
 # FDXF and HONA (June-2026 spin-offs) are excluded: no price history in window.
 A

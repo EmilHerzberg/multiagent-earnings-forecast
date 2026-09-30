@@ -69,19 +69,29 @@ The analysis plan cites design decisions as D1 … D32; they resolve in
 ## Known errata of the frozen inputs
 
 The curated membership files in `dataset/` are the ones the run used and are
-kept unchanged. Rolling the SPY holdings of 2026-09-21 back to the window
-start (`dataset/scripts/31_membership_anchor_rollback.py`) and comparing with
-them found:
+kept unchanged. Two retrospective checks — rolling the SPY holdings of
+2026-09-21 back to the window start
+(`dataset/scripts/31_membership_anchor_rollback.py`) and comparing with an
+independent list of the index on 2024-12-23
+(`dataset/scripts/32_membership_historical_list_check.py`) — found:
 
 - Apollo Global Management (APO) joined the index on 2024-12-23 and is
-  missing from the universe; its six in-window earnings events are absent
-  from the event pool.
-- Paramount Global (PARA) became Paramount Skydance (PSKY) on 2025-08-07 and
-  stayed in the index; the dataset treats it as having left.
+  missing from the working list; both checks list it. It could not be
+  selected, and which of its announcements would have been eligible was not
+  determined.
 - Eastman Chemical (EMN) left the index on 2025-11-04; the change log has no
-  row for it.
+  row for it, so some later Eastman events remained wrongly eligible. Only
+  the roll-back can reveal this, because Eastman was still a member on
+  2024-12-23.
+- Paramount Global (PARA) merged into Skydance on 2025-08-07 and stayed in
+  the index as PSKY. The provider closed the PARA price series and recorded
+  the merger as a delisting, so the price-based rule ended its membership;
+  the new symbol was never collected, and its later results are missing from
+  the event pool.
 
-None of the three companies is in the 840-event sample.
+None of the three companies is in the 840-event sample. Apart from these
+cases the working list agrees with the independent sources; see
+`dataset/README.md`, limitation 7.1, for how the membership files were made.
 
 ## Large run artefacts
 

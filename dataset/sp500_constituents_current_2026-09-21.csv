@@ -14,10 +14,12 @@
 # Cross-check: Alpha Vantage ETF_PROFILE for SPY (last_updated 2026-09-18)
 # lists 496 holdings; differences noted in the session log.
 #
-# Purpose: the citable anchor from which window-start membership (2025-01-01)
-# can be derived by reversing every verified index change between the two
-# dates (sp500_index_changes.csv covers 2025-01-01..2026-06-30; changes after
-# 2026-06-30 still have to be added for the roll-back).
+# Purpose: re-retrieval of the SPY holdings, with a date this time, for the
+# retrospective roll-back check (scripts/31_membership_anchor_rollback.py):
+# the ten changes after the window (sp500_index_changes_after_window.csv) and
+# the 59 in-window changes (sp500_index_changes.csv) are reversed from here to
+# obtain the membership on 2025-01-01. The working list itself was built before
+# the experiment from an earlier, undated retrieval of the same holdings file.
 symbol,name,cusip,weight_pct
 2602335D,TPG INC,436CVR021,0.000003
 A,AGILENT TECHNOLOGIES INC,00846U101,0.068582

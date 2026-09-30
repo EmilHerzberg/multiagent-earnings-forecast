@@ -239,7 +239,7 @@ This is what makes point-in-time membership possible: it is the table that lets 
 
 So the table describes 28 additions and 30 removals over eighteen months, against a stable core of ~500.
 
-**Easy to get wrong:** `from_source = 'assumed_at_window_start'` is an honest admission, not a verified fact. It says "we did not find a press release, and we are treating this company as a member from day one". For the 502 large, long-standing constituents that is safe, and `scripts/31_membership_anchor_rollback.py` checks it: rolling the SPY holdings back to the window start reproduces 501 of the 502 (Apollo is missing from the working list, see the repository README). It is written down so a reader can see the difference between the 28 dates that came from an S&P press release and the 502 that were assumed.
+**Easy to get wrong:** `from_source = 'assumed_at_window_start'` is an honest admission, not a verified fact. It says "we did not find a press release, and we are treating this company as a member from day one". For the 502 large, long-standing constituents that is safe, and two retrospective checks confirm it (`scripts/31_membership_anchor_rollback.py`, `scripts/32_membership_historical_list_check.py`): rolling the SPY holdings back to the window start reproduces 501 of the 502, and all 502 appear in an independent list of the index on 2024-12-23; the one company both checks add is Apollo, which is missing from the working list (see the repository README). It is written down so a reader can see the difference between the 28 dates that came from an S&P press release and the 502 that were assumed.
 
 ---
 

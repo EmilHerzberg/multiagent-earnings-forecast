@@ -6,16 +6,21 @@ and compare with the membership the dataset used.
 Not part of the pre-registered analysis. It reads only the curated files in
 the dataset folder, touches no database and calls no API.
 
-Why an anchor is needed
------------------------
+Why an anchor is needed, and what this repeats
+----------------------------------------------
 A change log alone (who joined, who left, on which day) does not say who was a
 member on day one. That needs one complete list at one date - the anchor -
 from which every other date follows by reversing the changes in between. The
-anchor here is the equity holdings of the SPDR S&P 500 ETF Trust (SPY) as
-published by the fund on ssga.com, holdings dated 2026-09-21, kept as
-``sp500_constituents_current_2026-09-21.csv`` with its source in the header.
-SPY replicates the index in full, so its equity holdings are the constituents
-on that date.
+working list ``sp500_constituents.txt`` was built before the experiment this
+way, from SPY holdings whose retrieval day was not recorded (README section
+7.1). This script repeats that backward calculation after the experiment with
+holdings retrieved again, this time with a date: the equity holdings of the
+SPDR S&P 500 ETF Trust (SPY) as published by the fund on ssga.com, dated
+2026-09-21, kept as ``sp500_constituents_current_2026-09-21.csv`` with its
+source in the header. SPY replicates the index in full, so its equity holdings
+are the constituents on that date. The companion check
+``32_membership_historical_list_check.py`` compares the same window-start
+membership with an independent historical list.
 
 What the script does
 --------------------

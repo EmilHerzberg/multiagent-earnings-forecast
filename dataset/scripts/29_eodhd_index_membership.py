@@ -12,9 +12,10 @@ The point-in-time membership used by ``09_build_events.py`` rests on two
 curated files: ``sp500_constituents.txt`` (the 530-symbol working list; the
 companies without an addition row are treated as members from the window
 start) and ``sp500_index_changes.csv`` (59 additions and removals, dated from
-S&P Dow Jones Indices press releases). Window-start membership is anchored on
-the SPY holdings and checked by rolling the changes back
-(``31_membership_anchor_rollback.py``, README section 7.1).
+S&P Dow Jones Indices press releases). Both files were built before the
+experiment from the SPY holdings and press-release research (README section
+7.1); the window-start membership was checked afterwards by
+``31_membership_anchor_rollback.py`` and ``32_membership_historical_list_check.py``.
 
 EODHD's index fundamentals carry that history for the S&P 500 since April
 2012. This script fetches it, turns it into the same two input files, and
