@@ -491,7 +491,9 @@ twelve constituents acquired or delisted during the window — BK, CTRA, DAY, FI
 HES, HOLX, IPG, JNPR, K, MMC, PARA, WBA — return an empty payload, even for
 quarters they reported while still trading. EODHD retains both their earnings
 (2–6 reports each) and their price history, so `earnings` and `prices_daily`
-cover all 501 constituents while `income_statement` covers 489.
+cover the whole working list while `income_statement` lacks those companies
+(measured on the build of 2026-08-10; the three renamed tickers were later
+recovered under their new symbols, see `ticker_renames.csv`).
 
 The consequence: **an inner join from `earnings` to `income_statement` silently
 drops exactly the delisted firms**, reintroducing survivorship bias into a
